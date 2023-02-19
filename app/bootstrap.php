@@ -43,7 +43,13 @@ $app->singleton(
 
 // Bind Phar helpers
 
-// Merge config data when config repository is instantiated
+$app->beforeBootstrapping(Hyde\Foundation\Internal\LoadConfiguration::class, function () use ($app) {
+    if (! is_dir(realpath($app->configPath()))) {
+        $app->useConfigPath(TEMP_DIR . '/config');
+        mkdir($app->configPath(), recursive: true);
+    }
+});
+
 $app->afterBootstrapping(Hyde\Foundation\Internal\LoadConfiguration::class, function () {
     config()->set('view.compiled', TEMP_DIR . '/views');
 });
