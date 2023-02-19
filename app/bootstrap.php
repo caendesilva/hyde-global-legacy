@@ -2,6 +2,8 @@
 
 // To allow the binary to be used anywhere, we define a temporary directory that Laravel can use to store compiled views and other cache files.
 define('TEMP_DIR', (sys_get_temp_dir() . '/hyde-'. md5(dirname(__DIR__))));
+// This is the directory that the binary is being run from.
+define('WORK_DIR', getcwd());
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +17,7 @@ define('TEMP_DIR', (sys_get_temp_dir() . '/hyde-'. md5(dirname(__DIR__))));
 */
 
 $app = new \Hyde\Foundation\Application(
-    getcwd()
+    WORK_DIR
 );
 
 /*
@@ -58,7 +60,7 @@ $app->afterBootstrapping(Hyde\Foundation\Internal\LoadConfiguration::class, func
 */
 
 $hyde = new \Hyde\Foundation\HydeKernel(
-    getcwd()
+    WORK_DIR
 );
 
 $app->singleton(
