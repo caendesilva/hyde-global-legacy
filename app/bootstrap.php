@@ -50,6 +50,10 @@ $app->beforeBootstrapping(Hyde\Foundation\Internal\LoadConfiguration::class, fun
             mkdir($app->configPath(), recursive: true);
         }
     }
+
+    if (! is_dir(realpath($app->storagePath() . '/framework/cache'))) {
+        mkdir($app->storagePath() . '/framework/cache', recursive: true);
+    }
 });
 
 $app->afterBootstrapping(Hyde\Foundation\Internal\LoadConfiguration::class, function () {
