@@ -36,6 +36,13 @@ $app->singleton(
     Illuminate\Foundation\Exceptions\Handler::class
 );
 
+// Bind Phar helpers
+
+// Merge config data when config repository is created
+$app->resolving('config', function ($config) {
+    $config->set('view.compiled', (sys_get_temp_dir() . '/hyde-'. md5(__FILE__)));
+});
+
 /*
 |--------------------------------------------------------------------------
 | Set Important Hyde Configurations
