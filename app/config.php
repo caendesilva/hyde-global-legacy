@@ -37,7 +37,7 @@ return [
     |
     */
 
-    'version' => Hyde\Hyde::version(),
+    'version' => Hyde\Hyde::version().' - Experimental Standalone',
 
     /*
     |--------------------------------------------------------------------------
