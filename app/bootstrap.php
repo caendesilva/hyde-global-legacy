@@ -38,9 +38,9 @@ $app->singleton(
 
 // Bind Phar helpers
 
-// Merge config data when config repository is created
-$app->resolving('config', function ($config) {
-    $config->set('view.compiled', (sys_get_temp_dir() . '/hyde-'. md5(__FILE__)));
+// Merge config data when config repository is instantiated
+$app->afterBootstrapping(Hyde\Foundation\Internal\LoadConfiguration::class, function () {
+    config()->set('view.compiled', (sys_get_temp_dir() . '/hyde-'. md5(__FILE__)));
 });
 
 /*
