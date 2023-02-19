@@ -40,7 +40,7 @@ $app->singleton(
 
 // Merge config data when config repository is instantiated
 $app->afterBootstrapping(Hyde\Foundation\Internal\LoadConfiguration::class, function () {
-    config()->set('view.compiled', (sys_get_temp_dir() . '/hyde-'. md5(__FILE__)));
+    config()->set('view.compiled', (sys_get_temp_dir() . '/hyde-'. md5(dirname(__DIR__))));
 });
 
 /*
