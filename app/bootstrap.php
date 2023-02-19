@@ -46,7 +46,9 @@ $app->singleton(
 $app->beforeBootstrapping(Hyde\Foundation\Internal\LoadConfiguration::class, function () use ($app) {
     if (! is_dir(realpath($app->configPath()))) {
         $app->useConfigPath(TEMP_DIR . '/config');
-        mkdir($app->configPath(), recursive: true);
+        if (! is_dir(realpath($app->configPath()))) {
+            mkdir($app->configPath(), recursive: true);
+        }
     }
 });
 
