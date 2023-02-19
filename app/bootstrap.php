@@ -1,5 +1,8 @@
 <?php
 
+// To allow the binary to be used anywhere, we define a temporary directory that Laravel can use to store compiled views and other cache files.
+define('TEMP_DIR', (sys_get_temp_dir() . '/hyde-'. md5(dirname(__DIR__))));
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -40,7 +43,7 @@ $app->singleton(
 
 // Merge config data when config repository is instantiated
 $app->afterBootstrapping(Hyde\Foundation\Internal\LoadConfiguration::class, function () {
-    config()->set('view.compiled', (sys_get_temp_dir() . '/hyde-'. md5(dirname(__DIR__))));
+    config()->set('view.compiled', TEMP_DIR . '/views');
 });
 
 /*
