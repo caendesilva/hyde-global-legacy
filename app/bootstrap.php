@@ -16,7 +16,7 @@ define('WORK_DIR', getcwd());
 |
 */
 
-$app = new \Hyde\Foundation\Application(
+$app = new \App\Phar\PharApplication(
     WORK_DIR
 );
 
