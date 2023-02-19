@@ -12,7 +12,7 @@
 */
 
 $app = new \Hyde\Foundation\Application(
-    dirname(__DIR__)
+    getcwd()
 );
 
 /*
@@ -48,7 +48,7 @@ $app->singleton(
 */
 
 $hyde = new \Hyde\Foundation\HydeKernel(
-    dirname(__DIR__)
+    getcwd()
 );
 
 $app->singleton(
