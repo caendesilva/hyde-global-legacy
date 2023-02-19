@@ -16,7 +16,7 @@ define('WORK_DIR', getcwd());
 |
 */
 
-$app = new \Hyde\Foundation\Application(
+$app = new \LaravelZero\Framework\Application(
     WORK_DIR
 );
 
