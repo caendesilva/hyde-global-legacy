@@ -60,3 +60,42 @@ jobs:
         path: builds/checksum
 
 # TODO: If the build is for a release tag we attach it to that, otherwise we create a prerelease for it
+
+  create-prerelease:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Download the application artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: hyde
+        path: builds
+
+    - name: Download the checksum artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: checksum
+        path: builds
+
+    - name: Create version tag
+      run: |
+        echo "Creating version tag!"
+        DATE=$(date '+%F')
+        SHORT_SHA=$(echo 07ce6ad72d9e29c23253e30394cbb6dc6b5ac19e | cut -c1-7)
+        VERSION_TAG="${DATE}-dev-master-${SHORT_SHA}"
+        VERSION_NAME="${DATE} - dev-master-${SHORT_SHA}"
+        echo "VERSION_TAG=${VERSION_TAG}" >> $GITHUB_ENV
+        echo "VERSION_NAME=${VERSION_NAME}" >> $GITHUB_ENV
+
+    - name: Create a prerelease
+      uses: ncipollo/release-action@v1
+      with:
+        token: ${{ secrets.GITHUB_RELEASE_TOKEN }}
+        name: ${{ env.VERSION_NAME }}
+        tag: ${{ env.VERSION_TAG }}
+        artifacts: builds/hyde, builds/checksum
+        body: |
+          SHA256 checksum of the application binary: $(cat builds/checksum)
+        prerelease: true
