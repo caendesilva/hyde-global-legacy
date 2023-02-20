@@ -2,6 +2,7 @@
 
 namespace App\Commands;
 
+use Hyde\Hyde;
 use Illuminate\Console\Scheduling\Schedule;
 use LaravelZero\Framework\Commands\Command;
 
@@ -25,7 +26,7 @@ class NewProjectCommand extends Command
     {
         parent::__construct();
 
-        if (file_exists(getcwd() . '/hyde')) {
+        if (file_exists(Hyde::path('hyde'))) {
             $this->setHidden();
         }
     }
