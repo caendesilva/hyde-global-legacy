@@ -97,7 +97,7 @@ jobs:
 # TODO: If the build is for a release tag we attach it to that, otherwise we create a prerelease for it
 
   create-prerelease:
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
     permissions:
       contents: write
