@@ -91,6 +91,7 @@ jobs:
         VERSION_NAME="${DATE} - dev-master-${SHORT_SHA}"
         echo "VERSION_TAG=${VERSION_TAG}" >> $GITHUB_ENV
         echo "VERSION_NAME=${VERSION_NAME}" >> $GITHUB_ENV
+        echo "CHECKSUM=$(cat builds/checksum)" >> $GITHUB_ENV
 
     - name: Create a prerelease
       uses: ncipollo/release-action@v1
@@ -100,5 +101,5 @@ jobs:
         tag: ${{ env.VERSION_TAG }}
         artifacts: builds/hyde, builds/checksum
         body: |
-          SHA256 checksum of the application binary: $(cat builds/checksum)
+          SHA256 checksum of the application binary: ${{ env.CHECKSUM }}
         prerelease: true
