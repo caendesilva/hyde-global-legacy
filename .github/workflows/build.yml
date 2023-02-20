@@ -60,6 +60,9 @@ jobs:
         path: builds/checksum
 
 
+# TODO: Run tests to make sure the build is working
+
+
 # TODO: If the build is for a release tag we attach it to that, otherwise we create a prerelease for it
 
   create-prerelease:
