@@ -15,6 +15,22 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Generate version number
+      run: |
+        git tag --list --sort=-creatordate --format='%(creatordate:short)' | grep -c $(date '+%F')
+        exit 1
+        # get the YYYY-MM-DD date and the number of builds for the day + 1
+        TODAY_RELEASE_COUNT=$(git tag --list --sort=-creatordate --format='%(creatordate:short)' | grep -c $(date '+%F'))
+        echo "TODAY_RELEASE_COUNT: $TODAY_RELEASE_COUNT"
+        TODAY_RELEASE_COUNT=$((TODAY_RELEASE_COUNT + 1))
+        echo "TODAY_RELEASE_COUNT: $TODAY_RELEASE_COUNT"
+        DATE=$(date '+%F')
+        echo "DATE: $DATE"
+        VERSION="${DATE}-dev.${TODAY_RELEASE_COUNT}"
+        echo "VERSION: $VERSION"
+        echo "VERSION=${VERSION}" >> $GITHUB_ENV
+
+
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
 
@@ -33,20 +49,7 @@ jobs:
     - name: Set application environment to development
       run: echo "ENV=development" > .env
 
-    - name: Generate version number
-      run: |
-        git tag --list --sort=-creatordate --format='%(creatordate:short)' | grep -c $(date '+%F')
-        exit 1
-        # get the YYYY-MM-DD date and the number of builds for the day + 1
-        TODAY_RELEASE_COUNT=$(git tag --list --sort=-creatordate --format='%(creatordate:short)' | grep -c $(date '+%F'))
-        echo "TODAY_RELEASE_COUNT: $TODAY_RELEASE_COUNT"
-        TODAY_RELEASE_COUNT=$((TODAY_RELEASE_COUNT + 1))
-        echo "TODAY_RELEASE_COUNT: $TODAY_RELEASE_COUNT"
-        DATE=$(date '+%F')
-        echo "DATE: $DATE"
-        VERSION="${DATE}-dev.${TODAY_RELEASE_COUNT}"
-        echo "VERSION: $VERSION"
-        echo "VERSION=${VERSION}" >> $GITHUB_ENV
+    # Generate version number
 
 
     - name: Build the standalone application binary
