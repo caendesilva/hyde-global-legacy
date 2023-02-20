@@ -122,8 +122,8 @@ jobs:
 
     - name: Get version information
       run: |
-        echo "CHECKSUM=$(cat builds/checksum)" >> $GITHUB_ENV
-        echo "CHECKSUM=$(cat builds/checksum)"
+        echo "CHECKSUM=$(cat builds/checksum | cut -d ' ' -f 1)" >> $GITHUB_ENV
+        echo "CHECKSUM=$(cat builds/checksum | cut -d ' ' -f 1)"
         echo "VERSION=$(cat version)" >> $GITHUB_ENV
         echo "VERSION=$(cat version)"
 
