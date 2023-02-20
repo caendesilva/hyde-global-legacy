@@ -37,7 +37,7 @@ jobs:
       run: |
         echo "Building the application!"
         DATE=$(date '+%F')
-        SHORT_SHA=$(echo 07ce6ad72d9e29c23253e30394cbb6dc6b5ac19e | cut -c1-7)
+        SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)
         VERSION="${DATE}-dev-master-${SHORT_SHA}"
         php hyde app:build --build-version="${VERSION}"
 
@@ -86,7 +86,7 @@ jobs:
     - name: Create version information
       run: |
         DATE=$(date '+%F')
-        SHORT_SHA=$(echo 07ce6ad72d9e29c23253e30394cbb6dc6b5ac19e | cut -c1-7)
+        SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)
         VERSION_TAG="${DATE}-dev-master-${SHORT_SHA}"
         VERSION_NAME="${DATE} - dev-master-${SHORT_SHA}"
         echo "VERSION_TAG=${VERSION_TAG}" >> $GITHUB_ENV
