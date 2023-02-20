@@ -30,6 +30,9 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-dev --no-progress
 
+    - name: Set application environment to development
+      run: echo "ENV=development" > .env
+
     - name: Build the application
       run: |
         DATE=$(date '+%F')
