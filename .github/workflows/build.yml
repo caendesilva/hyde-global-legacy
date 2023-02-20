@@ -37,7 +37,7 @@ jobs:
 
     - name: Generate version number
       run: |
-        # get the YYYY-MM-DD date and the number of builds for the day + 1
+        # get the YYYY-MM-DD date and the number of builds for the day + 1 (todo count only dev builds)
         TODAY_RELEASE_COUNT=$(git tag --list --sort=-creatordate --format='%(creatordate:short)' | grep -c $(date '+%F'))
         TODAY_RELEASE_COUNT=$((TODAY_RELEASE_COUNT + 1))
         DATE=$(date '+%F')
