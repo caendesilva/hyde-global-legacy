@@ -92,7 +92,7 @@ jobs:
     - name: Create a prerelease
       uses: ncipollo/release-action@v1
       with:
-        token: ${{ secrets.GITHUB_RELEASE_TOKEN }}
+        token: ${{ secrets.RELEASE_TOKEN }}
         name: ${{ env.VERSION_NAME }}
         tag: ${{ env.VERSION_TAG }}
         artifacts: builds/hyde, builds/checksum
