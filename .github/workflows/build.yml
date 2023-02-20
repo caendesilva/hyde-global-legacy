@@ -60,8 +60,23 @@ jobs:
         path: builds/checksum
 
 
-# TODO: Run tests to make sure the build is working
+  test-build:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
+    steps:
+    - name: Download the application artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: hyde
+
+    - name: Run the application
+      run: |
+        chmod +x hyde
+        ./hyde --version
+      
 
 # TODO: If the build is for a release tag we attach it to that, otherwise we create a prerelease for it
 
