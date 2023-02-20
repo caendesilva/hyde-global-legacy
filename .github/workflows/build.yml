@@ -37,14 +37,15 @@ jobs:
       run: |
         # get the YYYY-MM-DD date and the number of builds for the day + 1
         TODAY_RELEASE_COUNT=$(git tag --list --sort=-creatordate --format='%(creatordate:short)' | grep -c $(date '+%F'))
+        echo "TODAY_RELEASE_COUNT: $TODAY_RELEASE_COUNT"
         TODAY_RELEASE_COUNT=$((TODAY_RELEASE_COUNT + 1))
+        echo "TODAY_RELEASE_COUNT: $TODAY_RELEASE_COUNT"
         DATE=$(date '+%F')
+        echo "DATE: $DATE"
         VERSION="${DATE}-dev.${TODAY_RELEASE_COUNT}"
+        echo "VERSION: $VERSION"
         echo "VERSION=${VERSION}" >> $GITHUB_ENV
 
-        echo "TODAY_RELEASE_COUNT: $TODAY_RELEASE_COUNT"
-        echo "DATE: $DATE"
-        echo "VERSION: $VERSION"
 
     - name: Build the standalone application binary
       run: php hyde app:build --build-version="${{ env.VERSION }}"
