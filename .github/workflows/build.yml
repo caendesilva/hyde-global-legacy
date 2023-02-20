@@ -83,9 +83,8 @@ jobs:
         name: checksum
         path: builds
 
-    - name: Create version tag
+    - name: Create version information
       run: |
-        echo "Creating version tag!"
         DATE=$(date '+%F')
         SHORT_SHA=$(echo 07ce6ad72d9e29c23253e30394cbb6dc6b5ac19e | cut -c1-7)
         VERSION_TAG="${DATE}-dev-master-${SHORT_SHA}"
@@ -93,6 +92,10 @@ jobs:
         echo "VERSION_TAG=${VERSION_TAG}" >> $GITHUB_ENV
         echo "VERSION_NAME=${VERSION_NAME}" >> $GITHUB_ENV
         echo "CHECKSUM=$(cat builds/checksum)" >> $GITHUB_ENV
+
+        echo "VERSION_TAG=${VERSION_TAG}"
+        echo "VERSION_NAME=${VERSION_NAME}"
+        echo "CHECKSUM=$(cat builds/checksum)"
 
     - name: Create a prerelease
       uses: ncipollo/release-action@v1
