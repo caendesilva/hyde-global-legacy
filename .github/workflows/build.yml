@@ -35,6 +35,8 @@ jobs:
 
     - name: Generate version number
       run: |
+        git tag --list --sort=-creatordate --format='%(creatordate:short)' | grep -c $(date '+%F')
+        exit 1
         # get the YYYY-MM-DD date and the number of builds for the day + 1
         TODAY_RELEASE_COUNT=$(git tag --list --sort=-creatordate --format='%(creatordate:short)' | grep -c $(date '+%F'))
         echo "TODAY_RELEASE_COUNT: $TODAY_RELEASE_COUNT"
