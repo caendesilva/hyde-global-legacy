@@ -3,7 +3,6 @@
 namespace App\Commands;
 
 use Hyde\Hyde;
-use Illuminate\Console\Scheduling\Schedule;
 use LaravelZero\Framework\Commands\Command;
 
 class NewProjectCommand extends Command
