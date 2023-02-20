@@ -21,6 +21,15 @@ class NewProjectCommand extends Command
      */
     protected $description = 'Create a new Hyde project';
 
+    public function __construct()
+    {
+        parent::__construct();
+
+        if (file_exists(getcwd() . '/hyde')) {
+            $this->setHidden();
+        }
+    }
+
     /**
      * Execute the console command.
      *
