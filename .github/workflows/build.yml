@@ -120,12 +120,13 @@ jobs:
       with:
         name: version
 
-    - name: Get version information
+    - name: Prepare version information
       run: |
         echo "CHECKSUM=$(cat builds/checksum | cut -d ' ' -f 1)" >> $GITHUB_ENV
         echo "CHECKSUM=$(cat builds/checksum | cut -d ' ' -f 1)"
         echo "VERSION=$(cat version)" >> $GITHUB_ENV
         echo "VERSION=$(cat version)"
+        mv builds/checksum builds/checksum.txt
 
     - name: Create a prerelease
       uses: ncipollo/release-action@v1
@@ -133,7 +134,7 @@ jobs:
         token: ${{ secrets.RELEASE_TOKEN }}
         name: ${{ env.VERSION }}
         tag: ${{ env.VERSION }}
-        artifacts: builds/hyde, builds/checksum
+        artifacts: builds/hyde, builds/checksum.txt
         body: |
           ## Experimental development build
           
