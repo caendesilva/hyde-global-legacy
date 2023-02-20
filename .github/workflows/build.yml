@@ -58,3 +58,5 @@ jobs:
       with:
         name: checksum
         path: builds/checksum
+
+# TODO: If the build is for a release tag we attach it to that, otherwise we create a prerelease for it
