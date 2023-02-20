@@ -35,6 +35,7 @@ jobs:
 
     - name: Build the application
       run: |
+        echo "Building the application!"
         DATE=$(date '+%F')
         SHORT_SHA=$(echo 07ce6ad72d9e29c23253e30394cbb6dc6b5ac19e | cut -c1-7)
         VERSION="${DATE}-dev-master-${SHORT_SHA}"
