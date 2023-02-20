@@ -33,7 +33,7 @@ jobs:
     - name: Set application environment to development
       run: echo "ENV=development" > .env
 
-    - name: Build the application
+    - name: Build the standalone application binary
       run: |
         echo "Building the application!"
         DATE=$(date '+%F')
