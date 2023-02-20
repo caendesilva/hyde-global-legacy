@@ -52,3 +52,9 @@ jobs:
       with:
         name: hyde
         path: builds/hyde
+
+    - name: Upload the checksum artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: checksum
+        path: builds/checksum
