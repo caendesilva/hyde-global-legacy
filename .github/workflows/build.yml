@@ -103,26 +103,17 @@ jobs:
         name: checksum.txt
         path: builds
 
-    - name: Create version information
+    - name: Get checksum information
       run: |
-        DATE=$(date '+%F')
-        SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)
-        VERSION_TAG="${DATE}-dev-master-${SHORT_SHA}"
-        VERSION_NAME="${DATE} - dev-master-${SHORT_SHA}"
-        echo "VERSION_TAG=${VERSION_TAG}" >> $GITHUB_ENV
-        echo "VERSION_NAME=${VERSION_NAME}" >> $GITHUB_ENV
         echo "CHECKSUM=$(cat builds/checksum)" >> $GITHUB_ENV
-
-        echo "VERSION_TAG=${VERSION_TAG}"
-        echo "VERSION_NAME=${VERSION_NAME}"
         echo "CHECKSUM=$(cat builds/checksum)"
 
     - name: Create a prerelease
       uses: ncipollo/release-action@v1
       with:
         token: ${{ secrets.RELEASE_TOKEN }}
-        name: ${{ env.VERSION_NAME }}
-        tag: ${{ env.VERSION_TAG }}
+        name: ${{ env.VERSION }}
+        tag: ${{ env.VERSION }}
         artifacts: builds/hyde, builds/checksum
         body: |
           ## Experimental development build
