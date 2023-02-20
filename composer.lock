@@ -963,12 +963,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hydephp/framework.git",
-                "reference": "4fc04196ff86915a0d1709f05fc59bb73071bc38"
+                "reference": "fcf84661264531402a4035b35d02651aff35b2ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hydephp/framework/zipball/4fc04196ff86915a0d1709f05fc59bb73071bc38",
-                "reference": "4fc04196ff86915a0d1709f05fc59bb73071bc38",
+                "url": "https://api.github.com/repos/hydephp/framework/zipball/fcf84661264531402a4035b35d02651aff35b2ed",
+                "reference": "fcf84661264531402a4035b35d02651aff35b2ed",
                 "shasum": ""
             },
             "require": {
@@ -1015,7 +1015,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2023-02-20T13:16:37+00:00"
+            "time": "2023-02-20T18:59:24+00:00"
         },
         {
             "name": "hyde/realtime-compiler",
