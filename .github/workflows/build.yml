@@ -17,21 +17,6 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Generate version number
-      run: |
-        # get the YYYY-MM-DD date and the number of builds for the day + 1
-        TODAY_RELEASE_COUNT=$(git tag --list --sort=-creatordate --format='%(creatordate:short)' | grep -c $(date '+%F'))
-        echo "TODAY_RELEASE_COUNT: $TODAY_RELEASE_COUNT"
-        TODAY_RELEASE_COUNT=$((TODAY_RELEASE_COUNT + 1))
-        echo "TODAY_RELEASE_COUNT: $TODAY_RELEASE_COUNT"
-        DATE=$(date '+%F')
-        echo "DATE: $DATE"
-        VERSION="${DATE}-dev.${TODAY_RELEASE_COUNT}"
-        echo "VERSION: $VERSION"
-        echo "VERSION=${VERSION}" >> $GITHUB_ENV
-        exit 1;
-
-
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
 
@@ -50,8 +35,14 @@ jobs:
     - name: Set application environment to development
       run: echo "ENV=development" > .env
 
-    # Generate version number
-
+    - name: Generate version number
+      run: |
+        # get the YYYY-MM-DD date and the number of builds for the day + 1
+        TODAY_RELEASE_COUNT=$(git tag --list --sort=-creatordate --format='%(creatordate:short)' | grep -c $(date '+%F'))
+        TODAY_RELEASE_COUNT=$((TODAY_RELEASE_COUNT + 1))
+        DATE=$(date '+%F')
+        VERSION="${DATE}-dev.${TODAY_RELEASE_COUNT}"
+        echo "VERSION=${VERSION}" >> $GITHUB_ENV
 
     - name: Build the standalone application binary
       run: php hyde app:build --build-version="${{ env.VERSION }}"
