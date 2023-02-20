@@ -39,7 +39,7 @@ jobs:
         TODAY_RELEASE_COUNT=$(git tag --list --sort=-creatordate --format='%(creatordate:short)' | grep -c $(date '+%F'))
         TODAY_RELEASE_COUNT=$((TODAY_RELEASE_COUNT + 1))
         DATE=$(date '+%F')
-        VERSION="${DATE}-dev-master-${SHORT_SHA}"
+        VERSION="${DATE}-dev.${TODAY_RELEASE_COUNT}"
         echo "VERSION=${VERSION}" >> $GITHUB_ENV
 
     - name: Build the standalone application binary
