@@ -33,13 +33,17 @@ jobs:
     - name: Set application environment to development
       run: echo "ENV=development" > .env
 
-    - name: Build the standalone application binary
+    - name: Generate version number
       run: |
-        echo "Building the application!"
+        # get the YYYY-MM-DD date and the number of builds for the day + 1
+        TODAY_RELEASE_COUNT=$(git tag --list --sort=-creatordate --format='%(creatordate:short)' | grep -c $(date '+%F'))
+        TODAY_RELEASE_COUNT=$((TODAY_RELEASE_COUNT + 1))
         DATE=$(date '+%F')
-        SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)
         VERSION="${DATE}-dev-master-${SHORT_SHA}"
-        php hyde app:build --build-version="${VERSION}"
+        echo "VERSION=${VERSION}" >> $GITHUB_ENV
+
+    - name: Build the standalone application binary
+      run: php hyde app:build --build-version="${{ env.VERSION }}"
 
     - name: Calculate checksum
       run: |
