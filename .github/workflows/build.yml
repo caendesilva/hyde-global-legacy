@@ -83,7 +83,7 @@ jobs:
     - name: Download the checksum artifact
       uses: actions/download-artifact@v3
       with:
-        name: checksum
+        name: checksum.txt
         path: builds
 
     - name: Create version information
