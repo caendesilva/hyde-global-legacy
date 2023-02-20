@@ -42,6 +42,10 @@ jobs:
         VERSION="${DATE}-dev.${TODAY_RELEASE_COUNT}"
         echo "VERSION=${VERSION}" >> $GITHUB_ENV
 
+        echo "TODAY_RELEASE_COUNT: $TODAY_RELEASE_COUNT"
+        echo "DATE: $DATE"
+        echo "VERSION: $VERSION"
+
     - name: Build the standalone application binary
       run: php hyde app:build --build-version="${{ env.VERSION }}"
 
