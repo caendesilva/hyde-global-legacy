@@ -63,7 +63,7 @@ jobs:
     - name: Upload the checksum artifact
       uses: actions/upload-artifact@v3
       with:
-        name: checksum.txt
+        name: checksum
         path: builds/checksum
 
     - name: Upload the version number artifact
