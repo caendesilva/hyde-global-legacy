@@ -138,9 +138,9 @@ jobs:
           ## Experimental development build
           
           This is an automated experimental development build of the application.
-          It is not guaranteed to be stable or even work at all.
+          It is not guaranteed to be stable and may not work at all.
           
-          ## Checksum
+          ### Checksum
 
           SHA256 checksum of the application binary:
           ```
