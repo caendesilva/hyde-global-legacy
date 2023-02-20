@@ -105,5 +105,16 @@ jobs:
         tag: ${{ env.VERSION_TAG }}
         artifacts: builds/hyde, builds/checksum
         body: |
-          SHA256 checksum of the application binary: ${{ env.CHECKSUM }}
+          ## Experimental development build
+          
+          This is an automated experimental development build of the application.
+          It is not guaranteed to be stable or even work at all.
+          
+          ## Checksum
+
+          SHA256 checksum of the application binary:
+          ```
+          ${{ env.CHECKSUM }}
+          ```
+
         prerelease: true
