@@ -84,11 +84,12 @@ jobs:
       with:
         name: hyde
 
-    - name: Run the application
-      run: |
-        chmod +x hyde
-        ./hyde --version
+    - name: Make the application executable
+      run: chmod +x hyde
       
+    - name: Test that the application can run
+      run: ./hyde --version
+
 
 # TODO: If the build is for a release tag we attach it to that, otherwise we create a prerelease for it
 
