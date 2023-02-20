@@ -72,7 +72,7 @@ jobs:
         name: version
         path: version
 
-  test-build:
+  test:
     needs: build
     runs-on: ubuntu-latest
     permissions:
