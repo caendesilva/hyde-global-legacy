@@ -88,6 +88,9 @@ jobs:
       run: chmod +x hyde
       
     - name: Test that the application can run
+      run: ./hyde
+
+    - name: Test that the application version can be retrieved
       run: ./hyde --version
 
 
