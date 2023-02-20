@@ -43,6 +43,7 @@ jobs:
         DATE=$(date '+%F')
         VERSION="${DATE}-dev.${TODAY_RELEASE_COUNT}"
         echo "VERSION=${VERSION}" >> $GITHUB_ENV
+        echo $VERSION > version
 
     - name: Build the standalone application binary
       run: php hyde app:build --build-version="${{ env.VERSION }}"
@@ -65,6 +66,11 @@ jobs:
         name: checksum.txt
         path: builds/checksum
 
+    - name: Upload the version number artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: version
+        path: version
 
   test-build:
     needs: build
@@ -105,10 +111,17 @@ jobs:
         name: checksum.txt
         path: builds
 
-    - name: Get checksum information
+    - name: Download the version number artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: version
+
+    - name: Get version information
       run: |
         echo "CHECKSUM=$(cat builds/checksum)" >> $GITHUB_ENV
         echo "CHECKSUM=$(cat builds/checksum)"
+        echo "VERSION=$(cat version)" >> $GITHUB_ENV
+        echo "VERSION=$(cat version)"
 
     - name: Create a prerelease
       uses: ncipollo/release-action@v1
