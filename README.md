@@ -1,6 +1,6 @@
 # hyde-global
 
-Experimental global Hyde binary project
+Initial experimental global Hyde binary project, see https://github.com/caendesilva/hyde-global for new version
 
 ## Installation
 
